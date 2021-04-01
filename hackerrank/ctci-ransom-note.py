@@ -10,22 +10,22 @@ import sys
 
 
 def checkMagazine(magazine, note):
-    m = len(magazine)
-    n = len(note)
-    if n > m:
-        print('No')
-        return
+    flag_map = {}
+    for magazine_word in magazine:
+        if magazine_word not in flag_map:
+            flag_map[magazine_word] = 0
+        flag_map[magazine_word] += 1
     for note_word in note:
-        if note_word not in magazine:
+        if note_word in magazine and flag_map[note_word] > 0:
+            flag_map[note_word] -= 1
+        else:
             print("No")
             return
-        else:
-            magazine.pop(magazine.index(note_word))
     print("Yes")
 
 
 if __name__ == '__main__':
-    magazine = "two times three is not four".split()
+    magazine = "two times two and three is not four".split()
 
     note = "two times two is four".split()
 
