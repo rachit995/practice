@@ -10,11 +10,16 @@ import sys
 
 
 def arrayManipulation(n, queries):
-    arr = [0] * n
+    arr = [0] * (n + 1)
     for query in queries:
-        for index in range(query[0] - 1, query[1]):
-            arr[index] += query[2]
-    return max(arr)
+        arr[query[0] - 1] += query[2]
+        arr[query[1]] -= query[2]
+    s_m = 0
+    m = 0
+    for e in arr:
+        s_m += e
+        m = max(m, s_m)
+    return m
 
 
 if __name__ == '__main__':
