@@ -7,20 +7,17 @@ class Solution:
     def LargestEven(self, s):
         # code here
         numbers = []
+        number = ""
         for st in s:
             numbers.append(int(st))
-        combos = list(permutations(numbers, len(numbers)))
         if any(list(map(lambda x: x % 2 == 0, numbers))):
-            max_number = None
-            index = len(combos) - 1
-            while max_number is None:
-                d_number = combos[index][len(combos[index]) - 1]
-                if d_number % 2 == 0:
-                    max_number = "".join(list(map(str, combos[index])))
-                index -= 1
-            return max_number
-        else:
-            return "".join(list(map(str, combos[len(combos) - 1])))
+            min_even = min(list(filter(lambda x: x % 2 == 0, numbers)))
+            number += str(min_even)
+            numbers.remove(min_even)
+        numbers.sort()
+        for i in numbers:
+            number = str(i) + number
+        return number
 
 
 # {
